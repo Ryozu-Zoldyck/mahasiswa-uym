@@ -32,6 +32,9 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 # Set permission storage & cache
 RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache /var/www/html/public
 
+# Jalankan migrate setiap start container
+RUN php artisan config:clear && php artisan migrate --force
+
 # Expose port 80
 EXPOSE 80
 
